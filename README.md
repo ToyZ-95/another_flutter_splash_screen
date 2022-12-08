@@ -106,4 +106,4 @@ FlutterSplashScreen(
 
 We will be more than happy for your contributions.
 <br />
-Please contribute to [flutter_splash_screen](https://github.com/ToyZ-95/another_flutter_splash_screen) this github repo.
+Please contribute to [another_flutter_splash_screen](https://github.com/ToyZ-95/another_flutter_splash_screen) this github repo.
