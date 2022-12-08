@@ -29,7 +29,7 @@ You just need to add `another_flutter_splash_screen` as a [dependency in your pu
 
 ```yaml
 dependencies:
-  another_flutter_splash_screen: ^1.0.1
+  another_flutter_splash_screen: <Latest Version>
 ```
 
 ## Usage
