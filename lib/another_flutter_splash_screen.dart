@@ -2,6 +2,7 @@ library another_flutter_splash_screen;
 
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class FlutterSplashScreen extends StatefulWidget {
   FlutterSplashScreen({
     Key? key,
