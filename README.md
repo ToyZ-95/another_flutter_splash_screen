@@ -33,6 +33,8 @@ dependencies:
 
 ## Usage
 
+You just need to import `another_flutter_splash_screen`.
+
 ```dart
     import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 ```
