@@ -10,30 +10,98 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
+<!-- [![pub package](https://img.shields.io/pub/v/smart_snackbars.svg)](https://pub.dev/packages/smart_snackbars) -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Splash screens made simple
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif)
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add another_flutter_splash_screen to your pubspec.yaml file and start implementing splash screen easily.
+
+## Installation
+
+You just need to add `another_flutter_splash_screen` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
+
+```yaml
+dependencies:
+  another_flutter_splash_screen: ^1.0.0
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+```dart
+    import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+```
+
+### A splash screen with gif.
 
 ```dart
-const like = 'sample';
+FlutterSplashScreen(
+      duration: const Duration(milliseconds: 3515),
+      onInit: () async {
+        debugPrint("onInit 1");
+        await Future.delayed(const Duration(milliseconds: 2000));
+        debugPrint("onInit 2");
+      },
+      onEnd: () async {
+        debugPrint("onEnd 1");
+        debugPrint("onEnd 2");
+      },
+      splashScreenBody: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Center(
+          child: SizedBox(
+            width: 269,
+            height: 474,
+            child: Image.asset('assets/example.gif'),
+          ),
+        ),
+      ),
+      nextScreen: const MyHomePage(),
+    );
+```
+
+### A splash screen with fade in animation.
+
+```dart
+FlutterSplashScreen(
+      setStateCallback: () {
+        setState(
+          () {
+            opacity = 1;
+          },
+        );
+      },
+      backgroundColor: Colors.white,
+      splashScreenBody: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Center(
+          child: AnimatedOpacity(
+            opacity: opacity,
+            onEnd: () {
+              debugPrint("Animation End");
+            },
+            duration: const Duration(milliseconds: 2000),
+            child: SizedBox(
+              height: 200,
+              width: 200,
+              child: Image.asset("assets/dart_bird.png"),
+            ),
+          ),
+        ),
+      ),
+      nextScreen: const MyHomePage(),
+    );
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+We will be more than happy for your contributions.
+<br />
+Please contribute to [flutter_splash_screen](https://github.com/ToyZ-95/another_flutter_splash_screen) this github repo.
