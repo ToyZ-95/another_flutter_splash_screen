@@ -10,7 +10,8 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
-<!-- [![pub package](https://img.shields.io/pub/v/smart_snackbars.svg)](https://pub.dev/packages/smart_snackbars) -->
+
+[![pub package](https://img.shields.io/pub/v/another_flutter_splash_screen)](https://pub.dev/packages/another_flutter_splash_screen)
 
 # Splash screens made simple
 
