@@ -11,7 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-[![pub package](https://img.shields.io/pub/v/another_flutter_splash_screen?style=for-the-badge)](https://pub.dev/packages/another_flutter_splash_screen)
+[![pub package](https://img.shields.io/pub/v/another_flutter_splash_screen?logo=flutter&style=for-the-badge)](https://pub.dev/packages/another_flutter_splash_screen)
 
 # Splash screens made simple
 
