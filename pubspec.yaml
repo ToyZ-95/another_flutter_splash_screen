@@ -1,6 +1,6 @@
 name: another_flutter_splash_screen
 description: A flutter package that provides easy way to implement splash screen in your app. Also provides curated demos in the repo. 
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/ToyZ-95/another_flutter_splash_screen
 
 environment:
