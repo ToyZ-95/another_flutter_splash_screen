@@ -19,6 +19,9 @@ and the Flutter guide for
 
 ![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif)
 
+![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif)
+
+
 ## Getting started
 
 Add another_flutter_splash_screen to your pubspec.yaml file and start implementing splash screen easily.
