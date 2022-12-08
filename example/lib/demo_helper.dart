@@ -7,6 +7,7 @@ enum DemoType {
   opacity,
 }
 
+// ignore: must_be_immutable
 class DemoHelper extends StatefulWidget {
   DemoHelper({super.key, required this.demoType});
 
