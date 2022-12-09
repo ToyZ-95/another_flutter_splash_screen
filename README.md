@@ -17,9 +17,9 @@ and the Flutter guide for
 
 ## Features
 
-![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif=250x250)
+![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif)
 
-![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif=250x250)
+![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif)
 
 
 ## Getting started
