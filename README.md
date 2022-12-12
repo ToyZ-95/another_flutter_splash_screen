@@ -15,12 +15,11 @@ and the Flutter guide for
 
 # Splash screens made simple
 
+<p float="left">
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif" width="250" height="500"/>
 
-
-
-![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif)
-
-![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif)
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif" width="250" height="500"/>
+</p>
 
 
 ## Getting started
