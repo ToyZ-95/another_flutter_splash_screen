@@ -49,7 +49,6 @@ class _DemoHelperState extends State<DemoHelper> {
           onEnd: () {
             debugPrint("On End");
           },
-          fadeInAnimationDuration: const Duration(milliseconds: 1000),
           fadeInChildWidget: SizedBox(
             height: 200,
             width: 200,

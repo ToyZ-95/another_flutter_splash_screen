@@ -153,6 +153,12 @@ class FlutterSplashScreen extends StatefulWidget {
 
   SplashType splashType = SplashType.custom;
 
+  /// Takes curve of animation.
+  /// ```dart
+  /// Curve animationCurve = Curves.ease;
+  /// ```
+  Curve animationCurve = Curves.ease;
+
   @override
   State<FlutterSplashScreen> createState() => _FlutterSplashScreenState();
 
@@ -176,10 +182,11 @@ class FlutterSplashScreen extends StatefulWidget {
     super.key,
     required this.nextScreen,
     required this.fadeInChildWidget,
-    this.fadeInAnimationDuration = const Duration(milliseconds: 1500),
+    this.animationCurve = Curves.ease,
+    this.fadeInAnimationDuration = const Duration(milliseconds: 2000),
     this.duration = const Duration(milliseconds: 3000),
     this.backgroundColor = Colors.black,
-    this.setStateTimer = const Duration(milliseconds: 500),
+    this.setStateTimer = const Duration(milliseconds: 200),
     this.onFadeInEnd,
     this.onInit,
     this.onEnd,
@@ -234,7 +241,8 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
         ..backgroundColor = widget.backgroundColor
         ..onFadeInEnd = widget.onFadeInEnd
         ..fadeInChildWidget = widget.fadeInChildWidget
-        ..fadeInAnimationDuration = widget.fadeInAnimationDuration;
+        ..fadeInAnimationDuration = widget.fadeInAnimationDuration
+        ..animationCurve = widget.animationCurve;
     } else {
       return Scaffold(
         backgroundColor: widget.backgroundColor,

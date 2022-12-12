@@ -41,6 +41,12 @@ class FadeInSplash extends StatefulWidget {
   /// ```
   Duration? fadeInAnimationDuration;
 
+  /// Takes curve of animation.
+  /// ```dart
+  /// Curve animationCurve = Curves.ease;
+  /// ```
+  Curve? animationCurve = Curves.ease;
+
   //#endregion
 
   @override
@@ -55,6 +61,7 @@ class _FadeInSplashState extends State<FadeInSplash> {
       body: Center(
         child: AnimatedOpacity(
           opacity: widget.opacity,
+          curve: widget.animationCurve!,
           onEnd: widget.onFadeInEnd,
           duration: widget.fadeInAnimationDuration!,
           child: widget.fadeInChildWidget,
