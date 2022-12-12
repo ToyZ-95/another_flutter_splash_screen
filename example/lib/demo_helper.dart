@@ -1,10 +1,11 @@
-import 'package:example/demos/gif_demo.dart';
-import 'package:example/demos/opacity_demo.dart';
+import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:example/main.dart';
 import 'package:flutter/material.dart';
 
 enum DemoType {
+  custom,
   gif,
-  opacity,
+  fadeIn,
 }
 
 // ignore: must_be_immutable
@@ -22,9 +23,74 @@ class _DemoHelperState extends State<DemoHelper> {
   Widget build(BuildContext context) {
     switch (widget.demoType) {
       case DemoType.gif:
-        return const GifDemo();
-      case DemoType.opacity:
-        return const Opacitydemo();
+        return FlutterSplashScreen.gif(
+          gifPath: 'assets/example.gif',
+          gifWidth: 269,
+          gifHeight: 474,
+          nextScreen: const MyHomePage(),
+          duration: const Duration(milliseconds: 3515),
+          onInit: () async {
+            debugPrint("onInit 1");
+            await Future.delayed(const Duration(milliseconds: 2000));
+            debugPrint("onInit 2");
+          },
+          onEnd: () async {
+            debugPrint("onEnd 1");
+            debugPrint("onEnd 2");
+          },
+        );
+
+      case DemoType.fadeIn:
+        return FlutterSplashScreen.fadeIn(
+          backgroundColor: Colors.white,
+          onInit: () {
+            debugPrint("On Init");
+          },
+          onEnd: () {
+            debugPrint("On End");
+          },
+          fadeInAnimationDuration: const Duration(milliseconds: 1000),
+          fadeInChildWidget: SizedBox(
+            height: 200,
+            width: 200,
+            child: Image.asset("assets/dart_bird.png"),
+          ),
+          onFadeInEnd: () => debugPrint("On Fade In End"),
+          nextScreen: const MyHomePage(),
+        );
+      case DemoType.custom:
+        return FlutterSplashScreen(
+          duration: const Duration(milliseconds: 2000),
+          nextScreen: const MyHomePage(),
+          backgroundColor: Colors.white,
+          splashScreenBody: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 100,
+                ),
+                const Text(
+                  "Custom Splash",
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ),
+                const Spacer(),
+                SizedBox(
+                  width: 200,
+                  child: Image.asset('assets/flutter.png'),
+                ),
+                const Spacer(),
+                const Text(
+                  "Flutter is Love",
+                  style: TextStyle(color: Colors.pink, fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
+          ),
+        );
       default:
         return Container();
     }

@@ -22,22 +22,18 @@ class _OpacitydemoState extends State<Opacitydemo> {
           },
         );
       },
-      backgroundColor: Colors.white,
-      splashScreenBody: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: AnimatedOpacity(
-            opacity: opacity,
-            onEnd: () {
-              debugPrint("Animation End");
-            },
-            duration: const Duration(milliseconds: 2000),
-            child: SizedBox(
-              height: 200,
-              width: 200,
-              child: Image.asset("assets/dart_bird.png"),
-            ),
+      backgroundColor: Colors.amber,
+      splashScreenBody: Center(
+        child: AnimatedOpacity(
+          opacity: opacity,
+          onEnd: () {
+            debugPrint("Animation End");
+          },
+          duration: const Duration(milliseconds: 2000),
+          child: SizedBox(
+            height: 200,
+            width: 200,
+            child: Image.asset("assets/dart_bird.png"),
           ),
         ),
       ),
