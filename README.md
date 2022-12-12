@@ -15,7 +15,8 @@ and the Flutter guide for
 
 # Splash screens made simple
 
-## Features
+
+
 
 ![](https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif)
 
@@ -43,67 +44,84 @@ You just need to import `another_flutter_splash_screen`.
     import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 ```
 
-### A splash screen with gif.
+### A splash screen with a gif splash.
 
 ```dart
-FlutterSplashScreen(
-      duration: const Duration(milliseconds: 3515),
-      onInit: () async {
-        debugPrint("onInit 1");
-        await Future.delayed(const Duration(milliseconds: 2000));
-        debugPrint("onInit 2");
-      },
-      onEnd: () async {
-        debugPrint("onEnd 1");
-        debugPrint("onEnd 2");
-      },
-      splashScreenBody: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: SizedBox(
-            width: 269,
-            height: 474,
-            child: Image.asset('assets/example.gif'),
-          ),
-        ),
-      ),
-      nextScreen: const MyHomePage(),
-    );
-```
-
-### A splash screen with fade in animation.
-
-```dart
-FlutterSplashScreen(
-      setStateCallback: () {
-        setState(
-          () {
-            opacity = 1;
+FlutterSplashScreen.gif(
+          gifPath: 'assets/example.gif',
+          gifWidth: 269,
+          gifHeight: 474,
+          nextScreen: const MyHomePage(),
+          duration: const Duration(milliseconds: 3515),
+          onInit: () async {
+            debugPrint("onInit 1");
+            await Future.delayed(const Duration(milliseconds: 2000));
+            debugPrint("onInit 2");
+          },
+          onEnd: () async {
+            debugPrint("onEnd 1");
+            debugPrint("onEnd 2");
           },
         );
-      },
-      backgroundColor: Colors.white,
-      splashScreenBody: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: AnimatedOpacity(
-            opacity: opacity,
-            onEnd: () {
-              debugPrint("Animation End");
-            },
-            duration: const Duration(milliseconds: 2000),
-            child: SizedBox(
-              height: 200,
-              width: 200,
-              child: Image.asset("assets/dart_bird.png"),
+```
+
+### A splash screen with fade in splash.
+
+```dart
+FlutterSplashScreen.fadeIn(
+          backgroundColor: Colors.white,
+          onInit: () {
+            debugPrint("On Init");
+          },
+          onEnd: () {
+            debugPrint("On End");
+          },
+          animationCurve: Curves.easeIn,
+          fadeInChildWidget: SizedBox(
+            height: 200,
+            width: 200,
+            child: Image.asset("assets/dart_bird.png"),
+          ),
+          onFadeInEnd: () => debugPrint("On Fade In End"),
+          nextScreen: const MyHomePage(),
+        );
+```
+
+
+### A splash screen with custom splash.
+```dart
+FlutterSplashScreen(
+          duration: const Duration(milliseconds: 2000),
+          nextScreen: const MyHomePage(),
+          backgroundColor: Colors.white,
+          splashScreenBody: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 100,
+                ),
+                const Text(
+                  "Custom Splash",
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ),
+                const Spacer(),
+                SizedBox(
+                  width: 200,
+                  child: Image.asset('assets/flutter.png'),
+                ),
+                const Spacer(),
+                const Text(
+                  "Flutter is Love",
+                  style: TextStyle(color: Colors.pink, fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
             ),
           ),
-        ),
-      ),
-      nextScreen: const MyHomePage(),
-    );
+        )
 ```
 
 ## Additional information
