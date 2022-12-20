@@ -1,3 +1,7 @@
+## 1.1.1
+
+- readme and changlog files updated
+
 ## 1.1.0
 
 - nextScreen identifier renamed to defaultNextScreen.

@@ -235,7 +235,6 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
     }
 
     Future.delayed(widget.setStateTimer, () {
-      debugPrint("Set State");
       if (mounted) {
         widget.setStateCallback?.call();
         setState(() {});
