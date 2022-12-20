@@ -86,6 +86,21 @@ FlutterSplashScreen.fadeIn(
         );
 ```
 
+### Demonstration of setNextScreenAsyncCallback to dynamically decide which screen to show after the splash screen.
+```dart
+FlutterSplashScreen(
+...
+setNextScreenAsyncCallback: () async {
+      String? token = await CredentialStore.getBrearerToken();
+      if (token != null && token.isNotEmpty) {
+        CustomNavigator.instance.replace(nextScreen: const Dashboard());
+      } else {
+        CustomNavigator.instance.replace(nextScreen: SSOScreen());
+      }
+    },
+...
+)
+```
 
 ### A splash screen with custom splash.
 ```dart
