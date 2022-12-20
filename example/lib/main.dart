@@ -65,3 +65,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class MyHomePage2 extends StatefulWidget {
+  const MyHomePage2({super.key});
+
+  @override
+  State<MyHomePage2> createState() => _MyHomePage2State();
+}
+
+class _MyHomePage2State extends State<MyHomePage2> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Homepage 2"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Text(
+              'This screen comes dynamically after splash screen',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

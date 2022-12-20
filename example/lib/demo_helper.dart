@@ -6,6 +6,7 @@ enum DemoType {
   custom,
   gif,
   fadeIn,
+  dynamicNextScreenFadeIn,
 }
 
 // ignore: must_be_immutable
@@ -27,7 +28,7 @@ class _DemoHelperState extends State<DemoHelper> {
           gifPath: 'assets/example.gif',
           gifWidth: 269,
           gifHeight: 474,
-          nextScreen: const MyHomePage(),
+          defaultNextScreen: const MyHomePage(),
           duration: const Duration(milliseconds: 3515),
           onInit: () async {
             debugPrint("onInit 1");
@@ -55,12 +56,33 @@ class _DemoHelperState extends State<DemoHelper> {
             child: Image.asset("assets/dart_bird.png"),
           ),
           onFadeInEnd: () => debugPrint("On Fade In End"),
-          nextScreen: const MyHomePage(),
+          defaultNextScreen: const MyHomePage(),
+        );
+      case DemoType.dynamicNextScreenFadeIn:
+        return FlutterSplashScreen.fadeIn(
+          backgroundColor: Colors.white,
+          onInit: () {
+            debugPrint("On Init");
+          },
+          onEnd: () {
+            debugPrint("On End");
+          },
+          fadeInChildWidget: SizedBox(
+            height: 200,
+            width: 200,
+            child: Image.asset("assets/dart_bird.png"),
+          ),
+          onFadeInEnd: () => debugPrint("On Fade In End"),
+          defaultNextScreen: const MyHomePage(),
+          setNextScreenAsyncCallback: () async {
+            await Future.delayed(const Duration(milliseconds: 1500));
+            return const MyHomePage2();
+          },
         );
       case DemoType.custom:
         return FlutterSplashScreen(
           duration: const Duration(milliseconds: 2000),
-          nextScreen: const MyHomePage(),
+          defaultNextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
           splashScreenBody: Center(
             child: Column(

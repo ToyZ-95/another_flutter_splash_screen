@@ -5,6 +5,8 @@ import 'package:another_flutter_splash_screen/splashs/fade_In_splash.dart';
 import 'package:another_flutter_splash_screen/splashs/gif_splash.dart';
 import 'package:flutter/material.dart';
 
+typedef SetNextScreenAsyncCallback = Future<Widget> Function();
+
 // ignore: must_be_immutable
 class FlutterSplashScreen extends StatefulWidget {
   FlutterSplashScreen({
@@ -12,11 +14,12 @@ class FlutterSplashScreen extends StatefulWidget {
     this.duration = const Duration(milliseconds: 3000),
     this.backgroundColor = Colors.black,
     this.splashScreenBody,
-    required this.nextScreen,
+    required this.defaultNextScreen,
     this.setStateTimer = const Duration(milliseconds: 100),
     this.setStateCallback,
     this.onInit,
     this.onEnd,
+    this.setNextScreenAsyncCallback,
   }) : super(key: key);
 
   /// [Duration] for how long flutter splash screen should stay.
@@ -49,12 +52,27 @@ class FlutterSplashScreen extends StatefulWidget {
   /// ```
   Widget? splashScreenBody;
 
-  /// [Widget] to which app should navigate to after flutter splash screen.
+  /// Default screen to which app should navigate to after flutter splash screen if [setNextScreenAsyncCallback] is not provided.
 
   /// ```dart
-  ///  nextScreen: const MyHomePage(),
+  ///  defaultNextScreen: const MyHomePage(),
   /// ```
-  Widget? nextScreen;
+  Widget? defaultNextScreen;
+
+  /// An [AsyncCallback] that decides which screen is to set in [defaultNextScreen] at runtime.
+  ///
+  /// Please ensure that [duration] of the splash screen must be greater than the duration of [setNextScreenAsyncCallback] completion time.
+  /// ```dart
+  /// setNextScreenAsyncCallback: () async {
+  ///     String? token = await CredentialStore.getBrearerToken();
+  ///    if (token != null && token.isNotEmpty) {
+  ///      return Dashboard();
+  ///    } else {
+  ///      return SSOScreen();
+  ///    }
+  /// }
+  /// ```
+  SetNextScreenAsyncCallback? setNextScreenAsyncCallback;
 
   /// [Duration] to set the state of [splashScreenBody].
 
@@ -162,25 +180,28 @@ class FlutterSplashScreen extends StatefulWidget {
   @override
   State<FlutterSplashScreen> createState() => _FlutterSplashScreenState();
 
+  /// Provides ready-made gif templated splash;
   FlutterSplashScreen.gif({
     super.key,
     required this.gifPath,
     required this.gifWidth,
     required this.gifHeight,
-    required this.nextScreen,
+    required this.defaultNextScreen,
     this.duration = const Duration(milliseconds: 3000),
     this.backgroundColor = Colors.black,
     this.setStateTimer = const Duration(milliseconds: 100),
     this.setStateCallback,
     this.onInit,
     this.onEnd,
+    this.setNextScreenAsyncCallback,
   }) {
     splashType = SplashType.gif;
   }
 
+  /// Provides ready-made fadeIn templated splash;
   FlutterSplashScreen.fadeIn({
     super.key,
-    required this.nextScreen,
+    required this.defaultNextScreen,
     required this.fadeInChildWidget,
     this.animationCurve = Curves.ease,
     this.fadeInAnimationDuration = const Duration(milliseconds: 2000),
@@ -190,6 +211,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.onFadeInEnd,
     this.onInit,
     this.onEnd,
+    this.setNextScreenAsyncCallback,
   }) {
     splashType = SplashType.fadeIn;
 
@@ -206,6 +228,12 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
 
     widget.onInit?.call();
 
+    if (widget.setNextScreenAsyncCallback != null) {
+      widget.setNextScreenAsyncCallback
+          ?.call()
+          .then((value) => widget.defaultNextScreen = value);
+    }
+
     Future.delayed(widget.setStateTimer, () {
       debugPrint("Set State");
       if (mounted) {
@@ -220,7 +248,7 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return widget.nextScreen ?? Container();
+            return widget.defaultNextScreen ?? Container();
           },
         ),
       );
