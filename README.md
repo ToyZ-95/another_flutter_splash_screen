@@ -13,38 +13,36 @@ and the Flutter guide for
 
 [![pub package](https://img.shields.io/pub/v/another_flutter_splash_screen?logo=flutter&style=for-the-badge)](https://pub.dev/packages/another_flutter_splash_screen)
 
-# Splash screens made simple
+#  :star: Splash screens made simple :star:
 
-
-
+ </br>
+ 
+ > ### Also supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
+ > 
+ </br>
+ 
 ## Getting started
 
 Add another_flutter_splash_screen to your pubspec.yaml file and start implementing splash screen easily.
 
 ## Installation
 
-You just need to add `another_flutter_splash_screen` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
+Just add `another_flutter_splash_screen` as a [dependency in your pubspec.yaml file](https://flutter.io/using-packages/).
 
 ```yaml
 dependencies:
   another_flutter_splash_screen: <Latest Version>
 ```
-
+ </br>
+ 
 ## Usage
-
-
-
-Import `another_flutter_splash_screen`.
 
 ```dart
  import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 ```
- </br>
- 
- > ### Also supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
- 
- </br>
 
+ </br>
+ 
 ## A splash screen with a gif splash.
 
 <img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif" width="250" height="500"/>
@@ -108,6 +106,7 @@ FlutterSplashScreen.fadeIn(
           defaultNextScreen: const MyHomePage(),
         );
 ```
+
  </br>
 <a name="dynamic_next_screen">
 
@@ -119,13 +118,14 @@ FlutterSplashScreen.fadeIn(
 FlutterSplashScreen(
 ...
 setNextScreenAsyncCallback: () async {
-      String? token = await CredentialStore.getBrearerToken();
-      if (token != null && token.isNotEmpty) {
-        CustomNavigator.instance.replace(nextScreen: const Dashboard());
-      } else {
-        CustomNavigator.instance.replace(nextScreen: SSOScreen());
-      }
-    },
+        String? token = await CredentialStore.getBrearerToken();
+
+        if (token != null && token.isNotEmpty) {
+          return const Dashboard();
+        } else {
+          return SSOScreen();
+        }
+      },
 ...
 )
 ```
@@ -153,6 +153,7 @@ FlutterSplashScreen.fadeIn(
         )
 ```
  </br>
+ 
 ## A splash screen with custom splash.
 
 ```dart
