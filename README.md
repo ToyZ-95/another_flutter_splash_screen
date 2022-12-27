@@ -45,7 +45,7 @@ dependencies:
  
 ## A splash screen with a gif splash.
 
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif" width="250" height="500"/>
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/gif_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen.gif(
@@ -68,7 +68,7 @@ FlutterSplashScreen.gif(
  </br>
 
 ## A splash screen with fade in splash.
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif" width="250" height="500"/>
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/opacity_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen.fadeIn(
@@ -93,7 +93,7 @@ FlutterSplashScreen.fadeIn(
 
 ## A splash screen using background image.
 
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/background_image_demo.gif" width="250" height="500"/>
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/background_image_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen.fadeIn(
@@ -112,7 +112,7 @@ FlutterSplashScreen.fadeIn(
 
 ## Demonstration of setNextScreenAsyncCallback to dynamically decide which screen to show after the splash screen.
 
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/dynamic_next_screen_demo.gif" width="250" height="500"/>
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/dynamic_next_screen_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen(
@@ -135,7 +135,7 @@ setNextScreenAsyncCallback: () async {
 
 ## A splash screen using gradient.
 
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gradient_demo.gif" width="250" height="500"/>
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/gradient_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen.fadeIn(
