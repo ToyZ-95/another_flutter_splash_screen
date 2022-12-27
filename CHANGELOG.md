@@ -1,3 +1,8 @@
+## 1.1.2
+
+- background image support added
+- gradient support added
+
 ## 1.1.1
 
 - readme and changlog files updated

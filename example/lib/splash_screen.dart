@@ -13,6 +13,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DemoHelper(demoType: DemoType.usingBackgroundImage);
+    return DemoHelper(demoType: DemoType.gif);
   }
 }
