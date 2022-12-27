@@ -127,7 +127,7 @@ setNextScreenAsyncCallback: () async {
         }
       },
 ...
-)
+);
 ```
 
 </a>
@@ -150,7 +150,7 @@ FlutterSplashScreen.fadeIn(
             child: Image.asset("assets/tiktok.gif"),
           ),
           defaultNextScreen: const MyHomePage(),
-        )
+        );
 ```
  </br>
  
@@ -188,7 +188,7 @@ FlutterSplashScreen(
               ],
             ),
           ),
-        )
+        );
 ```
 
 ## Additional information
