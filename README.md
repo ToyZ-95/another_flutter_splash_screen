@@ -15,11 +15,6 @@ and the Flutter guide for
 
 # Splash screens made simple
 
-<p float="left">
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif" width="250" height="500"/>
-
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif" width="250" height="500"/>
-</p>
 
 
 ## Getting started
@@ -37,13 +32,22 @@ dependencies:
 
 ## Usage
 
-You just need to import `another_flutter_splash_screen`.
+
+
+Import `another_flutter_splash_screen`.
 
 ```dart
-    import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+ import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 ```
+ </br>
+ 
+ > ### Also supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
+ 
+ </br>
 
-### A splash screen with a gif splash.
+## A splash screen with a gif splash.
+
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gif_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen.gif(
@@ -63,8 +67,10 @@ FlutterSplashScreen.gif(
           },
         );
 ```
+ </br>
 
-### A splash screen with fade in splash.
+## A splash screen with fade in splash.
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/opacity_demo.gif" width="250" height="500"/>
 
 ```dart
 FlutterSplashScreen.fadeIn(
@@ -85,8 +91,30 @@ FlutterSplashScreen.fadeIn(
           nextScreen: const MyHomePage(),
         );
 ```
+ </br>
 
-### Demonstration of setNextScreenAsyncCallback to dynamically decide which screen to show after the splash screen.
+## A splash screen using background image.
+
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/background_image_demo.gif" width="250" height="500"/>
+
+```dart
+FlutterSplashScreen.fadeIn(
+          backgroundImage: Image.asset("assets/splash_bg.png"),
+          fadeInChildWidget: SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.asset("assets/twitter_logo_white.png"),
+          ),
+          defaultNextScreen: const MyHomePage(),
+        );
+```
+ </br>
+<a name="dynamic_next_screen">
+
+## Demonstration of setNextScreenAsyncCallback to dynamically decide which screen to show after the splash screen.
+
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/dynamic_next_screen_demo.gif" width="250" height="500"/>
+
 ```dart
 FlutterSplashScreen(
 ...
@@ -102,7 +130,31 @@ setNextScreenAsyncCallback: () async {
 )
 ```
 
-### A splash screen with custom splash.
+</a>
+ </br>
+
+## A splash screen using gradient.
+
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/blob/main/example/assets/gradient_demo.gif" width="250" height="500"/>
+
+```dart
+FlutterSplashScreen.fadeIn(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xffFF6972), Color(0xffFE6770)],
+          ),
+          fadeInChildWidget: SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.asset("assets/tiktok.gif"),
+          ),
+          defaultNextScreen: const MyHomePage(),
+        )
+```
+ </br>
+## A splash screen with custom splash.
+
 ```dart
 FlutterSplashScreen(
           duration: const Duration(milliseconds: 2000),
