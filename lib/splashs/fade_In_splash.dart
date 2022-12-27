@@ -49,6 +49,32 @@ class FadeInSplash extends StatefulWidget {
 
   //#endregion
 
+  /// Sets full screen background image.
+  ///
+  /// Supports both Image.assets() and Image.network()
+  ///
+  /// ```dart
+  /// backgroundImage : Image.asset("assets/splash_bg.png");
+  /// ```
+  /// ```dart
+  /// backgroundImage : Image.network("https://www.schemecolor.com/wallpaper?i=4334&og");
+  /// ```
+  Image? backgroundImage;
+
+  /// Sets full screen gradient.
+  ///
+  /// ```dart
+  /// gradient: const LinearGradient(
+  ///          begin: Alignment.topCenter,
+  ///          end: Alignment.bottomCenter,
+  ///          colors: [
+  ///            Colors.orange,
+  ///            Colors.deepOrange,
+  ///          ],
+  ///        ),
+  /// ```
+  Gradient? gradient;
+
   @override
   State<FadeInSplash> createState() => _FadeInSplashState();
 }
@@ -57,14 +83,25 @@ class _FadeInSplashState extends State<FadeInSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.backgroundColor,
-      body: Center(
-        child: AnimatedOpacity(
-          opacity: widget.opacity,
-          curve: widget.animationCurve!,
-          onEnd: widget.onFadeInEnd,
-          duration: widget.fadeInAnimationDuration!,
-          child: widget.fadeInChildWidget,
+      body: Container(
+        decoration: BoxDecoration(
+          color: widget.backgroundColor,
+          image: widget.backgroundImage != null
+              ? DecorationImage(
+                  image: widget.backgroundImage!.image,
+                  fit: BoxFit.fill,
+                )
+              : null,
+          gradient: widget.gradient,
+        ),
+        child: Center(
+          child: AnimatedOpacity(
+            opacity: widget.opacity,
+            curve: widget.animationCurve!,
+            onEnd: widget.onFadeInEnd,
+            duration: widget.fadeInAnimationDuration!,
+            child: widget.fadeInChildWidget,
+          ),
         ),
       ),
     );

@@ -173,9 +173,35 @@ class FlutterSplashScreen extends StatefulWidget {
 
   /// Takes curve of animation.
   /// ```dart
-  /// Curve animationCurve = Curves.ease;
+  /// animationCurve : Curves.ease;
   /// ```
   Curve animationCurve = Curves.ease;
+
+  /// Sets full screen background image.
+  ///
+  /// Supports both Image.assets() and Image.network()
+  ///
+  /// ```dart
+  /// backgroundImage : Image.asset("assets/splash_bg.png");
+  /// ```
+  /// ```dart
+  /// backgroundImage : Image.network("https://www.schemecolor.com/wallpaper?i=4334&og");
+  /// ```
+  Image? backgroundImage;
+
+  /// Sets full screen gradient.
+  ///
+  /// ```dart
+  /// gradient: const LinearGradient(
+  ///          begin: Alignment.topCenter,
+  ///          end: Alignment.bottomCenter,
+  ///          colors: [
+  ///            Colors.orange,
+  ///            Colors.deepOrange,
+  ///          ],
+  ///        ),
+  /// ```
+  Gradient? gradient;
 
   @override
   State<FlutterSplashScreen> createState() => _FlutterSplashScreenState();
@@ -194,6 +220,8 @@ class FlutterSplashScreen extends StatefulWidget {
     this.onInit,
     this.onEnd,
     this.setNextScreenAsyncCallback,
+    this.backgroundImage,
+    this.gradient,
   }) {
     splashType = SplashType.gif;
   }
@@ -212,6 +240,8 @@ class FlutterSplashScreen extends StatefulWidget {
     this.onInit,
     this.onEnd,
     this.setNextScreenAsyncCallback,
+    this.backgroundImage,
+    this.gradient,
   }) {
     splashType = SplashType.fadeIn;
 
@@ -261,7 +291,9 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
         ..backgroundColor = widget.backgroundColor
         ..gifPath = widget.gifPath
         ..gifHeight = widget.gifHeight
-        ..gifWidth = widget.gifWidth;
+        ..gifWidth = widget.gifWidth
+        ..backgroundImage = widget.backgroundImage
+        ..gradient = widget.gradient;
     } else if (widget.splashType == SplashType.fadeIn) {
       return FadeInSplash()
         ..opacity = widget._opacity
@@ -269,7 +301,9 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
         ..onFadeInEnd = widget.onFadeInEnd
         ..fadeInChildWidget = widget.fadeInChildWidget
         ..fadeInAnimationDuration = widget.fadeInAnimationDuration
-        ..animationCurve = widget.animationCurve;
+        ..animationCurve = widget.animationCurve
+        ..backgroundImage = widget.backgroundImage
+        ..gradient = widget.gradient;
     } else {
       return Scaffold(
         backgroundColor: widget.backgroundColor,

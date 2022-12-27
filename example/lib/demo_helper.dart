@@ -7,6 +7,8 @@ enum DemoType {
   gif,
   fadeIn,
   dynamicNextScreenFadeIn,
+  usingBackgroundImage,
+  usingGradient,
 }
 
 // ignore: must_be_immutable
@@ -40,7 +42,6 @@ class _DemoHelperState extends State<DemoHelper> {
             debugPrint("onEnd 2");
           },
         );
-
       case DemoType.fadeIn:
         return FlutterSplashScreen.fadeIn(
           backgroundColor: Colors.white,
@@ -58,15 +59,33 @@ class _DemoHelperState extends State<DemoHelper> {
           onFadeInEnd: () => debugPrint("On Fade In End"),
           defaultNextScreen: const MyHomePage(),
         );
+      case DemoType.usingBackgroundImage:
+        return FlutterSplashScreen.fadeIn(
+          backgroundImage: Image.asset("assets/splash_bg.png"),
+          fadeInChildWidget: SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.asset("assets/twitter_logo_white.png"),
+          ),
+          defaultNextScreen: const MyHomePage(),
+        );
+      case DemoType.usingGradient:
+        return FlutterSplashScreen.fadeIn(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xffFF6972), Color(0xffFE6770)],
+          ),
+          fadeInChildWidget: SizedBox(
+            height: 100,
+            width: 100,
+            child: Image.asset("assets/tiktok.gif"),
+          ),
+          defaultNextScreen: const MyHomePage(),
+        );
       case DemoType.dynamicNextScreenFadeIn:
         return FlutterSplashScreen.fadeIn(
           backgroundColor: Colors.white,
-          onInit: () {
-            debugPrint("On Init");
-          },
-          onEnd: () {
-            debugPrint("On End");
-          },
           fadeInChildWidget: SizedBox(
             height: 200,
             width: 200,
