@@ -1,3 +1,7 @@
+## 1.1.3
+
+- updated readme file
+
 ## 1.1.2
 
 - background image support added
