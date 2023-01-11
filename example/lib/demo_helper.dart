@@ -6,6 +6,7 @@ enum DemoType {
   custom,
   gif,
   fadeIn,
+  scale,
   dynamicNextScreenFadeIn,
   usingBackgroundImage,
   usingGradient,
@@ -51,18 +52,43 @@ class _DemoHelperState extends State<DemoHelper> {
           onEnd: () {
             debugPrint("On End");
           },
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 200,
             width: 200,
             child: Image.asset("assets/dart_bird.png"),
           ),
-          onFadeInEnd: () => debugPrint("On Fade In End"),
+          onAnimationEnd: () => debugPrint("On Fade In End"),
+          defaultNextScreen: const MyHomePage(),
+        );
+      case DemoType.scale:
+        return FlutterSplashScreen.scale(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.lightBlue,
+              Colors.blue,
+            ],
+          ),
+          onInit: () {
+            debugPrint("On Init");
+          },
+          onEnd: () {
+            debugPrint("On End");
+          },
+          childWidget: SizedBox(
+            height: 50,
+            child: Image.asset("assets/twitter_logo_white.png"),
+          ),
+          duration: const Duration(milliseconds: 1500),
+          animationDuration: const Duration(milliseconds: 1000),
+          onAnimationEnd: () => debugPrint("On Scale End"),
           defaultNextScreen: const MyHomePage(),
         );
       case DemoType.usingBackgroundImage:
         return FlutterSplashScreen.fadeIn(
           backgroundImage: Image.asset("assets/splash_bg.png"),
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 100,
             width: 100,
             child: Image.asset("assets/twitter_logo_white.png"),
@@ -76,7 +102,7 @@ class _DemoHelperState extends State<DemoHelper> {
             end: Alignment.bottomCenter,
             colors: [Color(0xffFF6972), Color(0xffFE6770)],
           ),
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 100,
             width: 100,
             child: Image.asset("assets/tiktok.gif"),
@@ -86,12 +112,12 @@ class _DemoHelperState extends State<DemoHelper> {
       case DemoType.dynamicNextScreenFadeIn:
         return FlutterSplashScreen.fadeIn(
           backgroundColor: Colors.white,
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 200,
             width: 200,
             child: Image.asset("assets/dart_bird.png"),
           ),
-          onFadeInEnd: () => debugPrint("On Fade In End"),
+          onAnimationEnd: () => debugPrint("On Fade In End"),
           defaultNextScreen: const MyHomePage(),
           setNextScreenAsyncCallback: () async {
             await Future.delayed(const Duration(milliseconds: 1500));

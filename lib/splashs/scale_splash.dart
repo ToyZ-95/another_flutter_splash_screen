@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class FadeInSplash extends StatefulWidget {
-  FadeInSplash({super.key});
+class ScaleSplash extends StatefulWidget {
+  ScaleSplash({super.key});
 
   /// Background color of flutter splash screen scaffold.
 
@@ -13,33 +13,33 @@ class FadeInSplash extends StatefulWidget {
   /// ```
   Color? backgroundColor;
 
-  //#region FadeIn
+  //#region Scale
 
-  double opacity = 0;
+  double scale = 0;
 
   /// A [VoidCallback] which will be triggered after flutter splash screen [Duration].
   /// ```dart
-  /// onFadeInEnd: ()  {
+  /// onScaleEnd: ()  {
   ///   debugPrint("Opacity Animation End");
   /// }
   /// ```
-  VoidCallback? onFadeInEnd;
+  VoidCallback? onScaleEnd;
 
   /// A child [Widget] which will be shown during opacity animation.
   /// ```dart
-  /// fadeInChildWidget : SizedBox(
+  /// scaleChildWidget : SizedBox(
   ///          height: 200,
   ///          width: 200,
   ///          child: Image.asset("assets/dart_bird.png"),
   ///       )
   /// ```
-  Widget? fadeInChildWidget;
+  Widget? scaleChildWidget;
 
   /// [Duration] to complate opacity animation.
   /// ```dart
-  /// fadeInAnimationDuration: const Duration(milliseconds: 2000),
+  /// scaleAnimationDuration: const Duration(milliseconds: 2000),
   /// ```
-  Duration? fadeInAnimationDuration;
+  Duration? scaleAnimationDuration;
 
   /// Takes curve of animation.
   /// ```dart
@@ -76,10 +76,10 @@ class FadeInSplash extends StatefulWidget {
   Gradient? gradient;
 
   @override
-  State<FadeInSplash> createState() => _FadeInSplashState();
+  State<ScaleSplash> createState() => _ScaleSplashState();
 }
 
-class _FadeInSplashState extends State<FadeInSplash> {
+class _ScaleSplashState extends State<ScaleSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,13 +95,21 @@ class _FadeInSplashState extends State<FadeInSplash> {
           gradient: widget.gradient,
         ),
         child: Center(
-          child: AnimatedOpacity(
-            opacity: widget.opacity,
+          child: AnimatedScale(
             curve: widget.animationCurve!,
-            onEnd: widget.onFadeInEnd,
-            duration: widget.fadeInAnimationDuration!,
-            child: widget.fadeInChildWidget,
+            onEnd: widget.onScaleEnd,
+            duration: widget.scaleAnimationDuration!,
+            scale: widget.scale,
+            child: widget.scaleChildWidget,
           ),
+
+          // AnimatedOpacity(
+          //   opacity: widget.opacity,
+          //   curve: widget.animationCurve!,
+          //   onEnd: widget.onFadeInEnd,
+          //   duration: widget.fadeInAnimationDuration!,
+          //   child: widget.fadeInChildWidget,
+          // ),
         ),
       ),
     );

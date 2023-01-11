@@ -3,6 +3,7 @@ library another_flutter_splash_screen;
 import 'package:another_flutter_splash_screen/enums/splash_type_enum.dart';
 import 'package:another_flutter_splash_screen/splashs/fade_In_splash.dart';
 import 'package:another_flutter_splash_screen/splashs/gif_splash.dart';
+import 'package:another_flutter_splash_screen/splashs/scale_splash.dart';
 import 'package:flutter/material.dart';
 
 typedef SetNextScreenAsyncCallback = Future<Widget> Function();
@@ -111,12 +112,12 @@ class FlutterSplashScreen extends StatefulWidget {
   /// A [VoidCallback] which will be triggered after flutter splash screen [Duration].
 
   /// ```dart
-  /// onInit: () async {
+  /// onEnd: () async {
   ///   if (isUserAlreadyLoggedIn) {
-  ///       CustomNavigator.instance.replace(nextScreen: const Dashboard());
+  ///       CustomNavigator.instance.replace(defaultNextScreen: const Dashboard());
   ///   }
   ///   else {
-  ///       CustomNavigator.instance.replace(nextScreen: LoginScreen());
+  ///       CustomNavigator.instance.replace(defaultNextScreen: LoginScreen());
   ///   }
   /// }
   /// ```
@@ -143,29 +144,31 @@ class FlutterSplashScreen extends StatefulWidget {
 
   double _opacity = 0;
 
+  double _scale = 0;
+
   /// A [VoidCallback] which will be triggered after flutter splash screen [Duration].
   /// ```dart
-  /// onInit: ()  {
-  ///   debugPrint("Opacity Animation End");
+  /// onAnimationEnd: ()  {
+  ///   debugPrint("Animation End");
   /// }
   /// ```
-  VoidCallback? onFadeInEnd;
+  VoidCallback? onAnimationEnd;
 
   /// A child [Widget] which will be shown during opacity animation.
   /// ```dart
-  /// opacityChildWidget : SizedBox(
+  /// childWidget : SizedBox(
   ///          height: 200,
   ///          width: 200,
   ///          child: Image.asset("assets/dart_bird.png"),
   ///       )
   /// ```
-  Widget? fadeInChildWidget;
+  Widget? childWidget;
 
   /// [Duration] to complate opacity animation.
   /// ```dart
-  /// duration: const Duration(milliseconds: 2000),
+  /// animationDuration: const Duration(milliseconds: 2000),
   /// ```
-  Duration? fadeInAnimationDuration;
+  Duration? animationDuration;
 
   //#endregion
 
@@ -230,13 +233,13 @@ class FlutterSplashScreen extends StatefulWidget {
   FlutterSplashScreen.fadeIn({
     super.key,
     required this.defaultNextScreen,
-    required this.fadeInChildWidget,
+    required this.childWidget,
     this.animationCurve = Curves.ease,
-    this.fadeInAnimationDuration = const Duration(milliseconds: 2000),
+    this.animationDuration = const Duration(milliseconds: 2000),
     this.duration = const Duration(milliseconds: 3000),
     this.backgroundColor = Colors.black,
     this.setStateTimer = const Duration(milliseconds: 200),
-    this.onFadeInEnd,
+    this.onAnimationEnd,
     this.onInit,
     this.onEnd,
     this.setNextScreenAsyncCallback,
@@ -247,6 +250,30 @@ class FlutterSplashScreen extends StatefulWidget {
 
     setStateCallback = () {
       _opacity = 1;
+    };
+  }
+
+  /// Provides ready-made fadeIn templated splash;
+  FlutterSplashScreen.scale({
+    super.key,
+    required this.defaultNextScreen,
+    required this.childWidget,
+    this.animationCurve = Curves.ease,
+    this.animationDuration = const Duration(milliseconds: 2000),
+    this.duration = const Duration(milliseconds: 3000),
+    this.backgroundColor = Colors.black,
+    this.setStateTimer = const Duration(milliseconds: 200),
+    this.onAnimationEnd,
+    this.onInit,
+    this.onEnd,
+    this.setNextScreenAsyncCallback,
+    this.backgroundImage,
+    this.gradient,
+  }) {
+    splashType = SplashType.scale;
+
+    setStateCallback = () {
+      _scale = 1;
     };
   }
 }
@@ -298,9 +325,19 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
       return FadeInSplash()
         ..opacity = widget._opacity
         ..backgroundColor = widget.backgroundColor
-        ..onFadeInEnd = widget.onFadeInEnd
-        ..fadeInChildWidget = widget.fadeInChildWidget
-        ..fadeInAnimationDuration = widget.fadeInAnimationDuration
+        ..onFadeInEnd = widget.onAnimationEnd
+        ..fadeInChildWidget = widget.childWidget
+        ..fadeInAnimationDuration = widget.animationDuration
+        ..animationCurve = widget.animationCurve
+        ..backgroundImage = widget.backgroundImage
+        ..gradient = widget.gradient;
+    } else if (widget.splashType == SplashType.scale) {
+      return ScaleSplash()
+        ..scale = widget._scale
+        ..backgroundColor = widget.backgroundColor
+        ..onScaleEnd = widget.onAnimationEnd
+        ..scaleChildWidget = widget.childWidget
+        ..scaleAnimationDuration = widget.animationDuration
         ..animationCurve = widget.animationCurve
         ..backgroundImage = widget.backgroundImage
         ..gradient = widget.gradient;
