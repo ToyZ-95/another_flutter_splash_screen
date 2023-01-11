@@ -52,7 +52,7 @@ FlutterSplashScreen.gif(
           gifPath: 'assets/example.gif',
           gifWidth: 269,
           gifHeight: 474,
-          nextScreen: const MyHomePage(),
+          defaultNextScreen: const MyHomePage(),
           duration: const Duration(milliseconds: 3515),
           onInit: () async {
             debugPrint("onInit 1");
@@ -79,14 +79,38 @@ FlutterSplashScreen.fadeIn(
           onEnd: () {
             debugPrint("On End");
           },
-          animationCurve: Curves.easeIn,
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 200,
             width: 200,
             child: Image.asset("assets/dart_bird.png"),
           ),
-          onFadeInEnd: () => debugPrint("On Fade In End"),
-          nextScreen: const MyHomePage(),
+          onAnimationEnd: () => debugPrint("On Fade In End"),
+          defaultNextScreen: const MyHomePage(),
+        );
+```
+ </br>
+ 
+ ## A splash screen with scale splash.
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/scale_demo.gif" width="250" height="500"/>
+
+```dart
+FlutterSplashScreen.scale(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.lightBlue,
+              Colors.blue,
+            ],
+          ),
+          childWidget: SizedBox(
+            height: 50,
+            child: Image.asset("assets/twitter_logo_white.png"),
+          ),
+          duration: const Duration(milliseconds: 1500),
+          animationDuration: const Duration(milliseconds: 1000),
+          onAnimationEnd: () => debugPrint("On Scale End"),
+          defaultNextScreen: const MyHomePage(),
         );
 ```
  </br>
@@ -98,7 +122,7 @@ FlutterSplashScreen.fadeIn(
 ```dart
 FlutterSplashScreen.fadeIn(
           backgroundImage: Image.asset("assets/splash_bg.png"),
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 100,
             width: 100,
             child: Image.asset("assets/twitter_logo_white.png"),
@@ -144,7 +168,7 @@ FlutterSplashScreen.fadeIn(
             end: Alignment.bottomCenter,
             colors: [Color(0xffFF6972), Color(0xffFE6770)],
           ),
-          fadeInChildWidget: SizedBox(
+          childWidget: SizedBox(
             height: 100,
             width: 100,
             child: Image.asset("assets/tiktok.gif"),
@@ -159,7 +183,7 @@ FlutterSplashScreen.fadeIn(
 ```dart
 FlutterSplashScreen(
           duration: const Duration(milliseconds: 2000),
-          nextScreen: const MyHomePage(),
+          defaultNextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
           splashScreenBody: Center(
             child: Column(
