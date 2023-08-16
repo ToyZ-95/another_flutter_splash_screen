@@ -17,9 +17,12 @@ and the Flutter guide for
 
  </br>
  
+ 
  > ### Also supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
  > 
  </br>
+
+ <a href="https://www.buymeacoffee.com/patelasad4u" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 150px !important;" ></a>
  
 ## Getting started
 
