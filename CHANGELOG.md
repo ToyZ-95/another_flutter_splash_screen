@@ -1,3 +1,7 @@
+## 1.1.5
+
+- Updated ReadMe
+
 ## 1.1.4
 
 - Splashscreen with Scale animation implemented
