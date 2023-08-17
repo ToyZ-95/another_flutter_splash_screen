@@ -1,6 +1,7 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:example/main.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 enum DemoType {
   custom,
@@ -10,6 +11,7 @@ enum DemoType {
   dynamicNextScreenFadeIn,
   usingBackgroundImage,
   usingGradient,
+  lottieAnimation,
 }
 
 // ignore: must_be_immutable
@@ -154,6 +156,18 @@ class _DemoHelperState extends State<DemoHelper> {
                   height: 100,
                 ),
               ],
+            ),
+          ),
+        );
+      case DemoType.lottieAnimation:
+        return FlutterSplashScreen(
+          duration: const Duration(milliseconds: 2000),
+          defaultNextScreen: const MyHomePage(),
+          backgroundColor: Colors.white,
+          splashScreenBody: Center(
+            child: Lottie.asset(
+              "assets/lottie_loading_2.json",
+              repeat: false,
             ),
           ),
         );

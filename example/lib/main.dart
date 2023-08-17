@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
@@ -80,10 +80,10 @@ class _MyHomePage2State extends State<MyHomePage2> {
       appBar: AppBar(
         title: const Text("Homepage 2"),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
+          children: <Widget>[
             Text(
               'This screen comes dynamically after splash screen',
             ),
