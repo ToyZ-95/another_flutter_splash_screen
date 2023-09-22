@@ -30,6 +30,7 @@ class _DemoHelperState extends State<DemoHelper> {
     switch (widget.demoType) {
       case DemoType.gif:
         return FlutterSplashScreen.gif(
+          useImmersiveMode: true,
           gifPath: 'assets/example.gif',
           gifWidth: 269,
           gifHeight: 474,

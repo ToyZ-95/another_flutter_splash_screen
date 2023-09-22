@@ -5,6 +5,7 @@ import 'package:another_flutter_splash_screen/splashs/fade_In_splash.dart';
 import 'package:another_flutter_splash_screen/splashs/gif_splash.dart';
 import 'package:another_flutter_splash_screen/splashs/scale_splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 typedef SetNextScreenAsyncCallback = Future<Widget> Function();
 
@@ -21,6 +22,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.onInit,
     this.onEnd,
     this.setNextScreenAsyncCallback,
+    this.useImmersiveMode = false,
   }) : super(key: key);
 
   /// [Duration] for how long flutter splash screen should stay.
@@ -206,6 +208,13 @@ class FlutterSplashScreen extends StatefulWidget {
   /// ```
   Gradient? gradient;
 
+  /// Hides status bar and shows splash screen on full screen.
+  ///
+  /// ```dart
+  /// useImmersiveMode: true,
+  /// ```
+  bool useImmersiveMode;
+
   @override
   State<FlutterSplashScreen> createState() => _FlutterSplashScreenState();
 
@@ -225,6 +234,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.setNextScreenAsyncCallback,
     this.backgroundImage,
     this.gradient,
+    this.useImmersiveMode = false,
   }) {
     splashType = SplashType.gif;
   }
@@ -245,6 +255,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.setNextScreenAsyncCallback,
     this.backgroundImage,
     this.gradient,
+    this.useImmersiveMode = false,
   }) {
     splashType = SplashType.fadeIn;
 
@@ -269,6 +280,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.setNextScreenAsyncCallback,
     this.backgroundImage,
     this.gradient,
+    this.useImmersiveMode = false,
   }) {
     splashType = SplashType.scale;
 
@@ -282,6 +294,10 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
   @override
   void initState() {
     super.initState();
+
+    if (widget.useImmersiveMode) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    }
 
     widget.onInit?.call();
 
@@ -309,6 +325,15 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
         ),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (widget.useImmersiveMode) {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: SystemUiOverlay.values);
+    }
   }
 
   @override
