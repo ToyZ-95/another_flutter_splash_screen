@@ -1,3 +1,7 @@
+## 1.1.7
+
+- License Updated (From BSD-3-Clause to MIT)
+
 ## 1.1.6
 
 - Added support for Immersive Mode (Hide Status Bar in Splash Screen).
