@@ -120,8 +120,9 @@ FlutterSplashScreen.scale(
 ```
  </br>
 <a name="immersive_mode">
-  # A splash screen using immersive mode (Hide status bar in splash screen).
-  ## Just pass "useImmersiveMode : true" to hide status bar in splash screen.
+  
+# A splash screen using immersive mode (Hide status bar in splash screen).
+## Just pass "useImmersiveMode : true" to hide status bar in splash screen.
 ### Demo 1
 <img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/immersive_demo_1.gif" width="250" height="500"/>
 
