@@ -1,24 +1,29 @@
+## 1.1.6
+
+- Added support for Immersive Mode (Hide Status Bar in Splash Screen).
+- Added example for using Lottie Animation in Splash Screen.
+
 ## 1.1.5
 
-- Updated ReadMe
+- Updated ReadMe.
 
 ## 1.1.4
 
-- Splashscreen with Scale animation implemented
-- Some docs refactoring
+- Splashscreen with Scale animation implemented.
+- Some docs refactoring.
 
 ## 1.1.3
 
-- updated readme file
+- updated readme file.
 
 ## 1.1.2
 
-- background image support added
-- gradient support added
+- background image support added.
+- gradient support added.
 
 ## 1.1.1
 
-- readme and changlog files updated
+- readme and changlog files updated.
 
 ## 1.1.0
 
@@ -32,7 +37,7 @@
 
 ## 1.0.1
 
-- Removed Warnings
+- Removed Warnings.
 
 ## 1.0.0
 
