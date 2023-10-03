@@ -162,6 +162,7 @@ class _DemoHelperState extends State<DemoHelper> {
         );
       case DemoType.lottieAnimation:
         return FlutterSplashScreen(
+          useImmersiveMode: true,
           duration: const Duration(milliseconds: 2000),
           defaultNextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
