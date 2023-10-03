@@ -18,7 +18,9 @@ and the Flutter guide for
  </br>
  
  
- > ### Also supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
+ > ### Supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
+ >
+ > ### Supports Immersive Mode (Hide Status Bar in Splash Screen). [Example here](#immersive_mode)
  > 
  </br>
 
@@ -117,6 +119,44 @@ FlutterSplashScreen.scale(
         );
 ```
  </br>
+<a name="immersive_mode">
+  # A splash screen using immersive mode (Hide status bar in splash screen).
+  ## Just pass "useImmersiveMode : true" to hide status bar in splash screen.
+### Demo 1
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/immersive_demo_1.gif" width="250" height="500"/>
+
+```dart
+FlutterSplashScreen.gif(
+          useImmersiveMode: true,
+          gifPath: 'assets/example.gif',
+          gifWidth: 269,
+          gifHeight: 474,
+          defaultNextScreen: const MyHomePage(),
+          duration: const Duration(milliseconds: 3515),
+        );
+```
+ </br>
+
+ </a>
+
+### Demo 2
+ <img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/immersive_demo_2.gif" width="250" height="500"/>
+
+```dart
+FlutterSplashScreen(
+          useImmersiveMode: true,
+          duration: const Duration(milliseconds: 2000),
+          defaultNextScreen: const MyHomePage(),
+          backgroundColor: Colors.white,
+          splashScreenBody: Center(
+            child: Lottie.asset(
+              "assets/lottie_loading_2.json",
+              repeat: false,
+            ),
+          ),
+        );
+```
+ </br>
 
 ## A splash screen using background image.
 
@@ -177,6 +217,26 @@ FlutterSplashScreen.fadeIn(
             child: Image.asset("assets/tiktok.gif"),
           ),
           defaultNextScreen: const MyHomePage(),
+        );
+```
+ </br>
+
+ ## A splash screen using lottie animation.
+
+<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/lottie_demo.gif" width="250" height="500"/>
+
+```dart
+FlutterSplashScreen(
+          useImmersiveMode: true,
+          duration: const Duration(milliseconds: 2000),
+          defaultNextScreen: const MyHomePage(),
+          backgroundColor: Colors.white,
+          splashScreenBody: Center(
+            child: Lottie.asset(
+              "assets/lottie_loading_2.json",
+              repeat: false,
+            ),
+          ),
         );
 ```
  </br>
