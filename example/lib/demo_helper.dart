@@ -34,7 +34,7 @@ class _DemoHelperState extends State<DemoHelper> {
           gifPath: 'assets/example.gif',
           gifWidth: 269,
           gifHeight: 474,
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           duration: const Duration(milliseconds: 3515),
           onInit: () async {
             debugPrint("onInit 1");
@@ -61,7 +61,7 @@ class _DemoHelperState extends State<DemoHelper> {
             child: Image.asset("assets/dart_bird.png"),
           ),
           onAnimationEnd: () => debugPrint("On Fade In End"),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
         );
       case DemoType.scale:
         return FlutterSplashScreen.scale(
@@ -86,7 +86,7 @@ class _DemoHelperState extends State<DemoHelper> {
           duration: const Duration(milliseconds: 1500),
           animationDuration: const Duration(milliseconds: 1000),
           onAnimationEnd: () => debugPrint("On Scale End"),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
         );
       case DemoType.usingBackgroundImage:
         return FlutterSplashScreen.fadeIn(
@@ -96,7 +96,7 @@ class _DemoHelperState extends State<DemoHelper> {
             width: 100,
             child: Image.asset("assets/twitter_logo_white.png"),
           ),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
         );
       case DemoType.usingGradient:
         return FlutterSplashScreen.fadeIn(
@@ -110,7 +110,7 @@ class _DemoHelperState extends State<DemoHelper> {
             width: 100,
             child: Image.asset("assets/tiktok.gif"),
           ),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
         );
       case DemoType.dynamicNextScreenFadeIn:
         return FlutterSplashScreen.fadeIn(
@@ -121,16 +121,17 @@ class _DemoHelperState extends State<DemoHelper> {
             child: Image.asset("assets/dart_bird.png"),
           ),
           onAnimationEnd: () => debugPrint("On Fade In End"),
-          defaultNextScreen: const MyHomePage(),
-          setNextScreenAsyncCallback: () async {
-            await Future.delayed(const Duration(milliseconds: 1500));
-            return const MyHomePage2();
+          nextScreen: const MyHomePage2(),
+          asyncCallback: () async {
+            print("object1");
+            await Future.delayed(const Duration(milliseconds: 5000));
+            print("object2");
           },
         );
       case DemoType.custom:
         return FlutterSplashScreen(
           duration: const Duration(milliseconds: 2000),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
           splashScreenBody: Center(
             child: Column(
@@ -164,7 +165,7 @@ class _DemoHelperState extends State<DemoHelper> {
         return FlutterSplashScreen(
           useImmersiveMode: true,
           duration: const Duration(milliseconds: 2000),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
           splashScreenBody: Center(
             child: Lottie.asset(

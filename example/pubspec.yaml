@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   lottie: ^2.6.0
+  go_router: ^11.1.2
   another_flutter_splash_screen:
     path: ../
 

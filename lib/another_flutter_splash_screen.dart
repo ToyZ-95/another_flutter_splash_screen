@@ -7,21 +7,21 @@ import 'package:another_flutter_splash_screen/splashs/scale_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-typedef SetNextScreenAsyncCallback = Future<Widget> Function();
+typedef AsyncCallback = Future Function();
 
 // ignore: must_be_immutable
 class FlutterSplashScreen extends StatefulWidget {
   FlutterSplashScreen({
     Key? key,
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration,
     this.backgroundColor = Colors.black,
     this.splashScreenBody,
-    required this.defaultNextScreen,
+    this.nextScreen,
     this.setStateTimer = const Duration(milliseconds: 100),
     this.setStateCallback,
     this.onInit,
     this.onEnd,
-    this.setNextScreenAsyncCallback,
+    this.asyncCallback,
     this.useImmersiveMode = false,
   }) : super(key: key);
 
@@ -29,7 +29,7 @@ class FlutterSplashScreen extends StatefulWidget {
   /// ```dart
   /// duration: const Duration(milliseconds: 2000),
   /// ```
-  Duration duration;
+  Duration? duration;
 
   /// Background color of flutter splash screen scaffold.
 
@@ -60,22 +60,23 @@ class FlutterSplashScreen extends StatefulWidget {
   /// ```dart
   ///  defaultNextScreen: const MyHomePage(),
   /// ```
-  Widget? defaultNextScreen;
+  Widget? nextScreen;
 
-  /// An [AsyncCallback] that decides which screen is to set in [defaultNextScreen] at runtime.
-  ///
-  /// Please ensure that [duration] of the splash screen must be greater than the duration of [setNextScreenAsyncCallback] completion time.
+  /// An [AsyncCallback] used to perform some operations asynchronously.
+  /// E.g. Loading data from server before moving to next screen.
+  /// Do not use [duration] while using asyncCallback. It just doesn't make sense.
   /// ```dart
-  /// setNextScreenAsyncCallback: () async {
+  /// asyncCallback: () async {
   ///     String? token = await CredentialStore.getBrearerToken();
   ///    if (token != null && token.isNotEmpty) {
-  ///      return Dashboard();
+  ///      await getHomeScreenData();
+  ///      GoRouter.of(context).goNamed("home");
   ///    } else {
-  ///      return SSOScreen();
+  ///      GoRouter.of(context).goNamed("/");
   ///    }
   /// }
   /// ```
-  SetNextScreenAsyncCallback? setNextScreenAsyncCallback;
+  AsyncCallback? asyncCallback;
 
   /// [Duration] to set the state of [splashScreenBody].
 
@@ -224,14 +225,14 @@ class FlutterSplashScreen extends StatefulWidget {
     required this.gifPath,
     required this.gifWidth,
     required this.gifHeight,
-    required this.defaultNextScreen,
-    this.duration = const Duration(milliseconds: 3000),
+    this.nextScreen,
+    this.duration,
     this.backgroundColor = Colors.black,
     this.setStateTimer = const Duration(milliseconds: 100),
     this.setStateCallback,
     this.onInit,
     this.onEnd,
-    this.setNextScreenAsyncCallback,
+    this.asyncCallback,
     this.backgroundImage,
     this.gradient,
     this.useImmersiveMode = false,
@@ -242,17 +243,17 @@ class FlutterSplashScreen extends StatefulWidget {
   /// Provides ready-made fadeIn templated splash;
   FlutterSplashScreen.fadeIn({
     super.key,
-    required this.defaultNextScreen,
+    this.nextScreen,
     required this.childWidget,
     this.animationCurve = Curves.ease,
     this.animationDuration = const Duration(milliseconds: 2000),
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration,
     this.backgroundColor = Colors.black,
     this.setStateTimer = const Duration(milliseconds: 200),
     this.onAnimationEnd,
     this.onInit,
     this.onEnd,
-    this.setNextScreenAsyncCallback,
+    this.asyncCallback,
     this.backgroundImage,
     this.gradient,
     this.useImmersiveMode = false,
@@ -267,17 +268,17 @@ class FlutterSplashScreen extends StatefulWidget {
   /// Provides ready-made fadeIn templated splash;
   FlutterSplashScreen.scale({
     super.key,
-    required this.defaultNextScreen,
+    this.nextScreen,
     required this.childWidget,
     this.animationCurve = Curves.ease,
     this.animationDuration = const Duration(milliseconds: 2000),
-    this.duration = const Duration(milliseconds: 3000),
+    this.duration,
     this.backgroundColor = Colors.black,
     this.setStateTimer = const Duration(milliseconds: 200),
     this.onAnimationEnd,
     this.onInit,
     this.onEnd,
-    this.setNextScreenAsyncCallback,
+    this.asyncCallback,
     this.backgroundImage,
     this.gradient,
     this.useImmersiveMode = false,
@@ -300,12 +301,11 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
     }
 
     widget.onInit?.call();
+  }
 
-    if (widget.setNextScreenAsyncCallback != null) {
-      widget.setNextScreenAsyncCallback
-          ?.call()
-          .then((value) => widget.defaultNextScreen = value);
-    }
+  @override
+  didChangeDependencies() async {
+    super.didChangeDependencies();
 
     Future.delayed(widget.setStateTimer, () {
       if (mounted) {
@@ -314,13 +314,25 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
       }
     });
 
-    Future.delayed(widget.duration, () {
+    if (widget.asyncCallback != null) {
+      assert(widget.duration == null);
+      await widget.asyncCallback?.call();
+    } else {
+      widget.duration ??= const Duration(seconds: 2);
+    }
+
+    Future.delayed(widget.duration ?? const Duration(), () {
       widget.onEnd?.call();
+
+      if (widget.nextScreen == null) {
+        return;
+      }
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return widget.defaultNextScreen ?? Container();
+            return widget.nextScreen ?? Container();
           },
         ),
       );
