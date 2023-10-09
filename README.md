@@ -125,20 +125,18 @@ FlutterSplashScreen.scale(
  ```dart
  FlutterSplashScreen.gif(
       ...
+      // go_router example
       asyncNavigationCallback: () async {
         var response = await userRepository.getUserData();
        if(response.status == 200 && response.data.isAuthenticated){
-           context.replace('/home');
-           // GoRouter.of(context).goNamed("home");
-           // context.goNamed('home');
+        GoRouter.of(context).goNamed("home");     
        }
        else{
-           context.replace('/');
            // GoRouter.of(context).goNamed("/");
-           // context.goNamed('/');
        }
       },
                    OR
+      // Named routing example
       asyncNavigationCallback: () async {
         await Future.delayed(const Duration(seconds: 3));
         if (context.mounted) {
