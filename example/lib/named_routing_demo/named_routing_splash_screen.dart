@@ -20,10 +20,10 @@ class _NamedRoutingSplashScreenState extends State<NamedRoutingSplashScreen> {
       duration: const Duration(seconds: 2),
       onEnd: () async {},
       asyncNavigationCallback: () async {
-        print("object");
         await Future.delayed(const Duration(seconds: 3));
-        print("object2");
-        Navigator.pushReplacementNamed(context, "home");
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, "home");
+        }
       },
     );
   }
