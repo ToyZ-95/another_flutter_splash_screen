@@ -23,7 +23,7 @@ class _GoRouterSplashScreenState extends State<GoRouterSplashScreen> {
         // GoRouter.of(context).goNamed("home");
         // context.goNamed('home');
       },
-      asyncCallback: () async {
+      asyncNavigationCallback: () async {
         print("object");
         await Future.delayed(const Duration(seconds: 3));
         print("object2");

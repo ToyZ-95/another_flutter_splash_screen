@@ -21,11 +21,12 @@ class FlutterSplashScreen extends StatefulWidget {
     this.setStateCallback,
     this.onInit,
     this.onEnd,
-    this.asyncCallback,
+    this.asyncNavigationCallback,
     this.useImmersiveMode = false,
   }) : super(key: key);
 
   /// [Duration] for how long flutter splash screen should stay.
+  /// #### NOTE: Do not use [duration] with [asyncNavigationCallback] as [asyncNavigationCallback]'s aim is to navigate only after call back completes.
   /// ```dart
   /// duration: const Duration(milliseconds: 2000),
   /// ```
@@ -55,10 +56,10 @@ class FlutterSplashScreen extends StatefulWidget {
   /// ```
   Widget? splashScreenBody;
 
-  /// Default screen to which app should navigate to after flutter splash screen if [setNextScreenAsyncCallback] is not provided.
+  /// Default screen to which app should navigate to after flutter splash screen if [asyncNavigationCallback] is not provided.
 
   /// ```dart
-  ///  defaultNextScreen: const MyHomePage(),
+  ///  nextScreen: const MyHomePage(),
   /// ```
   Widget? nextScreen;
 
@@ -71,12 +72,16 @@ class FlutterSplashScreen extends StatefulWidget {
   ///    if (token != null && token.isNotEmpty) {
   ///      await getHomeScreenData();
   ///      GoRouter.of(context).goNamed("home");
+  ///                 OR
+  ///      Navigator.pushReplacementNamed(context, "home");
   ///    } else {
   ///      GoRouter.of(context).goNamed("/");
+  ///                 OR
+  ///      Navigator.pushReplacementNamed(context, "/");
   ///    }
   /// }
   /// ```
-  AsyncCallback? asyncCallback;
+  AsyncCallback? asyncNavigationCallback;
 
   /// [Duration] to set the state of [splashScreenBody].
 
@@ -232,7 +237,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.setStateCallback,
     this.onInit,
     this.onEnd,
-    this.asyncCallback,
+    this.asyncNavigationCallback,
     this.backgroundImage,
     this.gradient,
     this.useImmersiveMode = false,
@@ -253,7 +258,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.onAnimationEnd,
     this.onInit,
     this.onEnd,
-    this.asyncCallback,
+    this.asyncNavigationCallback,
     this.backgroundImage,
     this.gradient,
     this.useImmersiveMode = false,
@@ -278,7 +283,7 @@ class FlutterSplashScreen extends StatefulWidget {
     this.onAnimationEnd,
     this.onInit,
     this.onEnd,
-    this.asyncCallback,
+    this.asyncNavigationCallback,
     this.backgroundImage,
     this.gradient,
     this.useImmersiveMode = false,
@@ -314,9 +319,10 @@ class _FlutterSplashScreenState extends State<FlutterSplashScreen> {
       }
     });
 
-    if (widget.asyncCallback != null) {
-      assert(widget.duration == null);
-      await widget.asyncCallback?.call();
+    if (widget.asyncNavigationCallback != null) {
+      assert(widget.duration == null,
+          "Duration must be null when you're using asyncNavigationCallback as its main purpose is to navigate to next screen only after some api calls or some code");
+      await widget.asyncNavigationCallback?.call();
     } else {
       widget.duration ??= const Duration(seconds: 2);
     }
