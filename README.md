@@ -18,7 +18,7 @@ and the Flutter guide for
  </br>
  
  
- > ### Supports deciding next screen dynamically. [Example here](#dynamic_next_screen)
+ > ### Supports deciding next screen dynamically. [Example here](#dynamic_routing)
  >
  > ### Supports Immersive Mode (Hide Status Bar in Splash Screen). [Example here](#immersive_mode)
  > 
@@ -57,16 +57,13 @@ FlutterSplashScreen.gif(
           gifPath: 'assets/example.gif',
           gifWidth: 269,
           gifHeight: 474,
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           duration: const Duration(milliseconds: 3515),
           onInit: () async {
-            debugPrint("onInit 1");
-            await Future.delayed(const Duration(milliseconds: 2000));
-            debugPrint("onInit 2");
+            debugPrint("onInit");
           },
           onEnd: () async {
             debugPrint("onEnd 1");
-            debugPrint("onEnd 2");
           },
         );
 ```
@@ -90,7 +87,7 @@ FlutterSplashScreen.fadeIn(
             child: Image.asset("assets/dart_bird.png"),
           ),
           onAnimationEnd: () => debugPrint("On Fade In End"),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
         );
 ```
  </br>
@@ -115,9 +112,44 @@ FlutterSplashScreen.scale(
           duration: const Duration(milliseconds: 1500),
           animationDuration: const Duration(milliseconds: 1000),
           onAnimationEnd: () => debugPrint("On Scale End"),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
         );
 ```
+ </br>
+
+<a name="dynamic_routing">
+ 
+ ## Dynamic routing
+ - ### Following is the example of Navigate using different mechanisms
+ 
+ ```dart
+ FlutterSplashScreen.gif(
+      ...
+      asyncNavigationCallback: () async {
+        var response = await userRepository.getUserData();
+       if(response.status == 200 && response.data.isAuthenticated){
+           context.replace('/home');
+           // GoRouter.of(context).goNamed("home");
+           // context.goNamed('home');
+       }
+       else{
+           context.replace('/');
+           // GoRouter.of(context).goNamed("/");
+           // context.goNamed('/');
+       }
+      },
+                   OR
+      asyncNavigationCallback: () async {
+        await Future.delayed(const Duration(seconds: 3));
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, "home");
+        }
+      },
+     ...
+    );
+ ```
+ 
+</a>
  </br>
 <a name="immersive_mode">
   
@@ -132,7 +164,7 @@ FlutterSplashScreen.gif(
           gifPath: 'assets/example.gif',
           gifWidth: 269,
           gifHeight: 474,
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           duration: const Duration(milliseconds: 3515),
         );
 ```
@@ -140,87 +172,6 @@ FlutterSplashScreen.gif(
 
  </a>
 
-### Demo 2
- <img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/immersive_demo_2.gif" width="250" height="500"/>
-
-```dart
-FlutterSplashScreen(
-          useImmersiveMode: true,
-          duration: const Duration(milliseconds: 2000),
-          defaultNextScreen: const MyHomePage(),
-          backgroundColor: Colors.white,
-          splashScreenBody: Center(
-            child: Lottie.asset(
-              "assets/lottie_loading_2.json",
-              repeat: false,
-            ),
-          ),
-        );
-```
- </br>
-
-## A splash screen using background image.
-
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/background_image_demo.gif" width="250" height="500"/>
-
-```dart
-FlutterSplashScreen.fadeIn(
-          backgroundImage: Image.asset("assets/splash_bg.png"),
-          childWidget: SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.asset("assets/twitter_logo_white.png"),
-          ),
-          defaultNextScreen: const MyHomePage(),
-        );
-```
-
- </br>
-<a name="dynamic_next_screen">
-
-## Demonstration of setNextScreenAsyncCallback to dynamically decide which screen to show after the splash screen.
-
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/dynamic_next_screen_demo.gif" width="250" height="500"/>
-
-```dart
-FlutterSplashScreen(
-...
-setNextScreenAsyncCallback: () async {
-        String? token = await CredentialStore.getBrearerToken();
-
-        if (token != null && token.isNotEmpty) {
-          return const Dashboard();
-        } else {
-          return SSOScreen();
-        }
-      },
-...
-);
-```
-
-</a>
- </br>
-
-## A splash screen using gradient.
-
-<img src="https://github.com/ToyZ-95/another_flutter_splash_screen/raw/main/example/assets/gradient_demo.gif" width="250" height="500"/>
-
-```dart
-FlutterSplashScreen.fadeIn(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xffFF6972), Color(0xffFE6770)],
-          ),
-          childWidget: SizedBox(
-            height: 100,
-            width: 100,
-            child: Image.asset("assets/tiktok.gif"),
-          ),
-          defaultNextScreen: const MyHomePage(),
-        );
-```
- </br>
 
  ## A splash screen using lottie animation.
 
@@ -230,7 +181,7 @@ FlutterSplashScreen.fadeIn(
 FlutterSplashScreen(
           useImmersiveMode: true,
           duration: const Duration(milliseconds: 2000),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
           splashScreenBody: Center(
             child: Lottie.asset(
@@ -247,7 +198,7 @@ FlutterSplashScreen(
 ```dart
 FlutterSplashScreen(
           duration: const Duration(milliseconds: 2000),
-          defaultNextScreen: const MyHomePage(),
+          nextScreen: const MyHomePage(),
           backgroundColor: Colors.white,
           splashScreenBody: Center(
             child: Column(
