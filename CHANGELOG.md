@@ -1,3 +1,8 @@
+## 1.2.0
+- Added support for using any navigation mechanism like go_router, named routing, etc
+- Added functionality to navigate only after provided asyncCallBack. e.g. fetching users data, fetching profile, etc
+- Minor code refactoring.
+
 ## 1.1.7
 
 - License Updated (From BSD-3-Clause to MIT)
