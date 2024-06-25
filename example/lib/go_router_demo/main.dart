@@ -1,6 +1,4 @@
-import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:example/go_router_demo/go_router_splash_screen.dart';
-import 'package:example/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

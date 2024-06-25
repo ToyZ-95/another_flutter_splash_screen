@@ -123,9 +123,7 @@ class _DemoHelperState extends State<DemoHelper> {
           onAnimationEnd: () => debugPrint("On Fade In End"),
           nextScreen: const MyHomePage2(),
           asyncNavigationCallback: () async {
-            print("object1");
             await Future.delayed(const Duration(milliseconds: 5000));
-            print("object2");
           },
         );
       case DemoType.custom:
